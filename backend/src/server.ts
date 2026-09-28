@@ -90,6 +90,6 @@ const heartbeat = setInterval(() => {
 }, HEARTBEAT_MS);
 wss.on("close", () => clearInterval(heartbeat));
 
-httpServer.listen(PORT, () => {
-  console.log(`[server] escutando em http://localhost:${PORT}`);
+httpServer.listen(PORT, "0.0.0.0", () => {
+  console.log(`[server] escutando em 0.0.0.0:${PORT}`);
 });
