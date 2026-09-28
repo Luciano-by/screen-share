@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Relógio de latência</title>
+<style>
+  body { margin: 0; background: #000; color: #0f0; display: grid; place-items: center; height: 100vh;
+         font: 700 18vw/1 ui-monospace, Consolas, monospace; }
+  small { position: fixed; bottom: 8px; left: 8px; color: #888; font: 14px system-ui; }
+</style>
+</head>
+<body>
+<div id="t">0</div>
+<small>Contador em milissegundos. Compartilhe esta aba/janela e compare o número aqui com o que aparece no espectador (ver TESTING.md).</small>
+<script>
+  const el = document.getElementById("t");
+  const t0 = performance.now();
+  (function loop() {
+    el.textContent = String(Math.floor((performance.now() - t0) % 100000)).padStart(5, "0");
+    requestAnimationFrame(loop);
+  })();
+</script>
+</body>
+</html>

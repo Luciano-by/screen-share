@@ -1,0 +1,235 @@
+:root {
+  color-scheme: dark;
+  --bg: #0e0e10;
+  --fg: #f2f2f2;
+  --accent: #4f9dff;
+  --muted: #8a8a8f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  gap: 0.5rem;
+}
+
+.home__title {
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+.home__subtitle {
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+  max-width: 32ch;
+}
+
+.home__actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn--secondary {
+  background: transparent;
+  border-color: var(--muted);
+  color: var(--fg);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.room {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  gap: 0.5rem;
+}
+
+.room__link {
+  font-family: ui-monospace, monospace;
+  background: #1a1a1d;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: var(--accent);
+}
+
+.room__note {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.room__error {
+  color: #ff6b6b;
+  font-size: 0.875rem;
+}
+
+.room__video {
+  width: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+.quality {
+  border: 1px solid #2a2a2e;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+}
+
+.quality legend {
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding: 0 0.25rem;
+}
+
+.quality__option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.banner {
+  background: #1a1a1d;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.banner__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* STEP-012: espectador (só volume + tela cheia, spec seção 17) */
+.viewer {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewer__video {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  background: #000;
+}
+
+.viewer:fullscreen .viewer__video {
+  max-height: none;
+  flex: 1;
+  min-height: 0;
+}
+
+.viewer__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.viewer__bar input[type="range"] {
+  flex: 0 1 200px;
+}
+
+.viewer__fs {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid var(--muted);
+  border-radius: 6px;
+  color: var(--fg);
+  font-size: 1.1rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+}
+
+.viewer__unmute {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* STEP-013: painel de debug (?debug=1) */
+.debug {
+  position: fixed;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  margin: 0;
+  max-width: calc(100vw - 1rem);
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: #7CFC9A;
+  font: 11px/1.4 ui-monospace, monospace;
+  text-align: left;
+  white-space: pre-wrap;
+  border-radius: 6px;
+  z-index: 10;
+}
+
+/* STEP-016: estado da conexão visível no espectador */
+.viewer__video { min-height: 40vh; }
+
+.viewer__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  text-align: center;
+  color: #ccc;
+  pointer-events: none;
+}

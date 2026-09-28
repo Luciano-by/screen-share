@@ -1,0 +1,31 @@
+# STEP-011: mantém o backend Node.js ativo sem Docker (spec seção 11).
+#
+# Instalação:
+#   sudo cp screen-share-backend.service /etc/systemd/system/
+#   sudo cp screen-share-backend.env.example /opt/screen-share/backend/.env
+#   # edite o .env com os valores reais (TURN_SECRET etc)
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now screen-share-backend
+
+[Unit]
+Description=Screen Share - servidor de sinalizacao (WebSocket + HTTP)
+After=network.target
+
+[Service]
+Type=simple
+User=screenshare
+Group=screenshare
+WorkingDirectory=/opt/screen-share/backend
+EnvironmentFile=/opt/screen-share/backend/.env
+ExecStart=/usr/bin/node dist/server.js
+Restart=on-failure
+RestartSec=3
+
+# Hardening básico (opcional, mas recomendado)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/screen-share/backend
+
+[Install]
+WantedBy=multi-user.target
