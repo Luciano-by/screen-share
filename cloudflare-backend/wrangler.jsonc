@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cloudflare-backend",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-26",
+
+  "observability": {
+    "enabled": true
+  },
+
+  "upload_source_maps": true,
+
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "ROOM",
+        "class_name": "RoomDurableObject"
+      }
+    ]
+  },
+
+  "exports": {
+    "RoomDurableObject": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  }
+}
