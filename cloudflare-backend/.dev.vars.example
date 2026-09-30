@@ -1,0 +1,4 @@
+# Copie para .dev.vars (ignorado pelo git) para testar localmente.
+# Em produção use: npx wrangler secret put TURN_KEY_ID / TURN_KEY_API_TOKEN
+TURN_KEY_ID=
+TURN_KEY_API_TOKEN=

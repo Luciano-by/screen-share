@@ -1,4 +1,5 @@
 import { RoomDurableObject } from "./room";
+import { generateIceServers, type TurnEnv } from "./turn";
 
 export { RoomDurableObject };
 
@@ -22,24 +23,28 @@ export default {
       );
     }
 
-    if (
-      url.pathname ===
-      "/turn-credentials"
-    ) {
-      return new Response(
-        JSON.stringify({
-          iceServers: [],
-        }),
-        {
-          status: 200,
-          headers: {
-            "Content-Type":
-              "application/json",
-            "Access-Control-Allow-Origin":
-              "*",
-          },
-        },
+    if (url.pathname === "/turn-credentials") {
+      const cors = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+      };
+
+      if (request.method === "OPTIONS") {
+        return new Response(null, { status: 204, headers: cors });
+      }
+
+      const iceServers = await generateIceServers(
+        env as unknown as TurnEnv,
       );
+
+      return new Response(JSON.stringify({ iceServers }), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-store",
+          ...cors,
+        },
+      });
     }
 
     if (
